@@ -43,8 +43,9 @@ def search(fbid, text):
     try:
         vid = data['items'][0]['id']['videoId']
         #print vid
-        link = yt_grabber(vid)
-        post_msg(fbid, link)
+        flink = 'http://www.youtubeinmp3.com/fetch/?video=https://www.youtube.com/watch?v=' + vid
+        #link = yt_grabber(vid)
+        post_msg(fbid, flink)
     except:
         print "No video id!"
     
