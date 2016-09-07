@@ -13,7 +13,7 @@ import urlparse
 import requests
 import json
 youtube_api_key = 'AIzaSyCwfYr2kH1prDPTXMKPDUGAsJMfzTz-x2c'
-access_token = 'EAAWkem72GcIBAOMF4AUYuZBkakT3arZBDkKL5RhTqzmjV1CRoGOkCLzEPmovAUh7UEdzdcSMsOs1uFcVkkL5XMYbkGI0YwFjWgVksgZBJA9hBOWIcKCTkLtJgR1NlI7SZCnuRfJgAFxJM2lw4GZBlVhAGnBYhbnp1LJ2uVZB6XJwZDZD'
+access_token = 'EAAQEBiZBEdF0BAEUVSA4tckX8JnBTlhcOThVa9B1G581SyxEUZB5hWVhQvifBwac8iyrZCmpuZBMyXSsLXyHHhtQhpmZC99JvWQJ2gmoUqX1dID4g54MBeQiZB7e2jMGaJK2UzGxuSNdEz1hRoi4FZAteqtBGGBVbzQ6gZAlrwI6DAZDZD'
 verify_token = '8510865767'
 
 
@@ -23,7 +23,7 @@ def yt_grabber(vid):
     r = requests.get(grabber_url)
     return json.loads(r.text)['link']
 
-def post_msg(fbid,data):
+def post_msg(fbid, data):
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'% access_token
     response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":data}})
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
