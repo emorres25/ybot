@@ -33,6 +33,9 @@ def search(fbid, text):
     q = text.split()
     url_q = '+'.join(q)
     url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=' + url_q + '&key=' + youtube_api_key
+    
+    post_msg(fbid, url)
+    '''
     r = requests.get(url)
     raw_data = r.text
     #print raw_data
@@ -44,7 +47,7 @@ def search(fbid, text):
         post_msg(fbid, link)
     except:
         print "No video id!"
-
+    '''
 
 
 class youtubebot(generic.View):
