@@ -23,6 +23,14 @@ def yt_grabber(vid):
     r = requests.get(grabber_url)
     return json.loads(r.text)['link']
 
+
+def post_img(fbid, data):
+    post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'% access_token
+    response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"attachment":{"type":"image","payload":{"url":data}}}})
+    status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
+    pprint(status.json())
+    
+
 def post_msg(fbid, data):
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'% access_token
     response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":data}})
@@ -43,7 +51,7 @@ def search(fbid, text):
     try:
         vid = data['items'][0]['id']['videoId']
         img = data['items'][0]['snippet']['thumbnails']['high']['url']
-        post_msg(fbid, img)
+        post_img(fbid, img)
         #print vid
         #flink = 'http://www.youtubeinmp3.com/fetch/?video=https://www.youtube.com/watch?v=' + vid
         link = yt_grabber(vid)
