@@ -42,6 +42,8 @@ def search(fbid, text):
     data = json.loads(raw_data)
     try:
         vid = data['items'][0]['id']['videoId']
+        img = data['items'][0]['snippet']['thumbnails']['high']['url']
+        post_msg(fbid, img)
         #print vid
         #flink = 'http://www.youtubeinmp3.com/fetch/?video=https://www.youtube.com/watch?v=' + vid
         link = yt_grabber(vid)
