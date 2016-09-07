@@ -68,7 +68,8 @@ class youtubebot(generic.View):
             for message in entry['messaging']: 
                 if 'message' in message: 
                     try:
-                        search(message['sender']['id'], message['message']['text'])  
+                        #search(message['sender']['id'], message['message']['text'])  
+                        post_msg(message['sender']['id'], "Holla!")
                         #get_meaning(message['sender']['id'], message['message']['text'])
                         #send_yo()
                     except Exception as e:
