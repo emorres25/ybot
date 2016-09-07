@@ -19,31 +19,31 @@ verify_token = '8510865767'
 
 
 def yt_grabber(vid):
-	grabber_url = 'http://www.youtubeinmp3.com/fetch/?format=JSON&video=http://www.youtube.com/watch?v=' + vid
-	r = requests.get(grabber_url)
-	return json.loads(r.text)['link']
+    grabber_url = 'http://www.youtubeinmp3.com/fetch/?format=JSON&video=http://www.youtube.com/watch?v=' + vid
+    r = requests.get(grabber_url)
+    return json.loads(r.text)['link']
 
 def post_msg(fbid,data):
-	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'% access_token
+    post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'% access_token
     response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":data}})
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
     pprint(status.json())
 
 def search(fbid, text):
-	q = text.split()
-	url_q = '+'.join(q)
-	url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=' + url_q + '&key=' + youtube_api_key
-	r = requests.get(url)
-	raw_data = r.text
-	#print raw_data
-	data = json.loads(raw_data)
-	try:
-		vid = data['items'][0]['id']['videoId']
-		#print vid
-		link = yt_grabber(vid)
-		post_msg(fbid, link)
-	except:
-		print "No video id!"
+    q = text.split()
+    url_q = '+'.join(q)
+    url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=' + url_q + '&key=' + youtube_api_key
+    r = requests.get(url)
+    raw_data = r.text
+    #print raw_data
+    data = json.loads(raw_data)
+    try:
+        vid = data['items'][0]['id']['videoId']
+        #print vid
+        link = yt_grabber(vid)
+        post_msg(fbid, link)
+    except:
+        print "No video id!"
 
 
 
@@ -65,7 +65,7 @@ class youtubebot(generic.View):
             for message in entry['messaging']: 
                 if 'message' in message: 
                     try:
-                    	search(message['sender']['id'], message['message']['text'])  
+                        search(message['sender']['id'], message['message']['text'])  
                         #get_meaning(message['sender']['id'], message['message']['text'])
                         #send_yo()
                     except Exception as e:
